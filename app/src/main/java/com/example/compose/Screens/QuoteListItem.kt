@@ -1,5 +1,6 @@
 package com.example.compose.Screens
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -31,10 +32,13 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.compose.DataManager
 import com.example.compose.Quote
 
 @Composable
 fun QuoteListItem(quote: Quote?,onClick: ()-> Unit) {
+
+
 
     Card (
         elevation = CardDefaults.cardElevation(
@@ -60,22 +64,30 @@ fun QuoteListItem(quote: Quote?,onClick: ()-> Unit) {
             )
             Spacer(modifier = Modifier.padding(4.dp))
             Column(modifier = Modifier.weight(1f)) {
+                if (quote != null) {
+                    Log.d("QuoteListItem", "Quote data: ${quote.quote} - ${quote.author}")
+                }
+                if (quote != null) {
+                    Text(text = quote.quote,
+                        style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.padding(0.dp,0.dp,0.dp,8.dp)
+                    )
+                }
 
-                Text(text = quote?.Quote.toString(),
-                    style = MaterialTheme.typography.bodyLarge,
-                    modifier = Modifier.padding(0.dp,0.dp,0.dp,8.dp)
-                )
+
+                
                 Box ( modifier = Modifier
                     .background(Color(0xFFEEEEEE))
                     .fillMaxSize(.4f)
                     .height(1.dp)
                 )
-                Text(text = quote?.Author.toString()
-                , style = MaterialTheme.typography.bodySmall,
-                    fontWeight = FontWeight.Thin,
-                    modifier = Modifier
-                        .padding(top = 4.dp)
-                )
+                if (quote != null) {
+                    Text(text = quote.author, style = MaterialTheme.typography.bodySmall,
+                        fontWeight = FontWeight.Thin,
+                        modifier = Modifier
+                            .padding(top = 4.dp)
+                    )
+                }
 
 
             }
@@ -124,11 +136,11 @@ private fun QuoteDetails(quote: Quote) {
                         .size(80.dp)
 
                 )
-                Text(text =quote.Quote,
+                Text(text =quote.quote,
                     style = MaterialTheme.typography.headlineLarge
                 )
                 Spacer(modifier = Modifier.height(16.dp))
-                Text(text = quote.Author,
+                Text(text = quote.author,
                     style = MaterialTheme.typography.bodyMedium)
 
             }

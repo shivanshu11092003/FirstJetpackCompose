@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun App() {
 
-    if (DataManager.isloaded.value == true){
+    if (DataManager.isloaded.value){
         QuoteListScreen(data = DataManager.data) {
 
         }

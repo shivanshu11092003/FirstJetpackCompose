@@ -1,5 +1,6 @@
 package com.example.compose.Screens
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -20,8 +21,14 @@ fun QuoteListScreen(data : Array<Quote>,onClick : ()-> Unit) {
                 .padding(8.dp, 24.dp)
                 .fillMaxSize(1f)
         , style = MaterialTheme.typography.headlineMedium)
+        Log.d("Qoute LIst Screen","${data.size}")
+        data.forEach { quote ->
+            Log.d("QuoteListScreen", "Quote: ${quote.quote} - ${quote.author}")
+        }
+
         Quotelist(data = data) {
             onClick
+
             
         }
     }
